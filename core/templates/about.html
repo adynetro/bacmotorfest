@@ -2,9 +2,68 @@
 
 {% block title %}About Event - BAC Motorfest{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero.hero-video {
+        position: relative;
+        min-height: 68vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5rem 0;
+        background: #05070f;
+    }
+
+    .hero-bg-video-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    .hero-bg-iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 177.78vh;
+        min-width: 100%;
+        height: 56.25vw;
+        min-height: 100%;
+        transform: translate(-50%, -50%);
+        border: 0;
+        pointer-events: none;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+            linear-gradient(180deg, rgba(5, 7, 15, 0.6) 0%, rgba(5, 7, 15, 0.78) 100%),
+            radial-gradient(circle at 50% 20%, rgba(255, 210, 74, 0.22), rgba(5, 7, 15, 0.1) 45%);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="hero">
-    <div class="container">
+<div class="hero hero-video">
+    <div class="hero-bg-video-wrap" aria-hidden="true">
+        <iframe
+            class="hero-bg-iframe"
+            src="https://www.youtube.com/embed/SjLo6AN1fWQ?autoplay=1&mute=1&controls=0&loop=1&playlist=SjLo6AN1fWQ&modestbranding=1&rel=0&playsinline=1"
+            title="About hero video"
+            allow="autoplay; encrypted-media"
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
         <p class="hero-kicker">About the Event</p>
         <h1>Bucovina Auto Club Motorfest</h1>
         <p>A modern auto festival focused on modified builds, retro icons, motorsport culture, and memorable community experiences.</p>
