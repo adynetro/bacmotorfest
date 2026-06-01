@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-q4xa3_2=%(((uq8&a52v3q%xw4eimjfos3$n1ho^=cq)tx71!o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -123,3 +123,9 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Optional production overrides (not committed)
+try:
+    from .settings_local import *  # noqa: F403
+except ImportError:
+    pass
