@@ -48,6 +48,7 @@
             border-bottom: 1px solid rgba(255, 210, 74, 0.25);
             backdrop-filter: blur(10px);
             padding: 1rem 0;
+            transition: padding 0.2s ease;
         }
 
         .navbar .container {
@@ -74,6 +75,16 @@
             object-fit: contain;
             display: block;
             filter: drop-shadow(0 6px 18px rgba(255, 210, 74, 0.28));
+            transition: width 0.25s ease, min-width 0.25s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+        }
+
+        .navbar.scrolled .brand-logo {
+            width: min(26vw, 190px);
+            min-width: 150px;
         }
 
         .nav-link {
@@ -407,6 +418,19 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function () {
+            const navbar = document.querySelector(".navbar");
+            if (!navbar) return;
+
+            const syncNavbarState = () => {
+                navbar.classList.toggle("scrolled", window.scrollY > 40);
+            };
+
+            syncNavbarState();
+            window.addEventListener("scroll", syncNavbarState, { passive: true });
+        })();
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>
