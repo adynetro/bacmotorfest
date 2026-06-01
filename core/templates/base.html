@@ -171,6 +171,24 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
+        .no-box {
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+        }
+
+        .no-box > .card-body {
+            padding: 0 !important;
+        }
+
+        .feature-plain {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: 1rem;
+            margin-top: 0.6rem;
+        }
+
         .card-title {
             color: #fff8dc;
             font-family: "Inter", sans-serif;
