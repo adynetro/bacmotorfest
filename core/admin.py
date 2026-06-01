@@ -35,8 +35,21 @@ class GalleryBulkUploadForm(forms.Form):
     class MultipleFileInput(forms.ClearableFileInput):
         allow_multiple_selected = True
 
-    images = forms.FileField(
+    class MultipleFileField(forms.FileField):
+        def clean(self, data, initial=None):
+            single_file_clean = super().clean
+            if isinstance(data, (list, tuple)):
+                result = []
+                for uploaded_file in data:
+                    result.append(single_file_clean(uploaded_file, initial))
+                return result
+            if data:
+                return [single_file_clean(data, initial)]
+            return []
+
+    images = MultipleFileField(
         widget=MultipleFileInput(),
+        required=False,
         help_text="Select one or multiple images.",
     )
     start_order = forms.IntegerField(
@@ -76,7 +89,7 @@ class GalleryAdmin(admin.ModelAdmin):
 
         if request.method == "POST":
             form = GalleryBulkUploadForm(request.POST, request.FILES)
-            files = request.FILES.getlist("images")
+            files = form.files.getlist("images")
 
             if form.is_valid() and files:
                 max_order = gallery.images.order_by("-order").values_list("order", flat=True).first()
