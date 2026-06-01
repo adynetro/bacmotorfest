@@ -21,8 +21,11 @@ class RegistrationForm(forms.ModelForm):
             }),
             "bike_info": forms.TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Bike Make/Model/Year (Optional)"
+                "placeholder": "Car Make/Model/Year (Optional)"
             }),
+        }
+        labels = {
+            "bike_info": "Car Information",
         }
 
 

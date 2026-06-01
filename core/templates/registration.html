@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header border-bottom" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.08) !important;">
                         <h5 class="mb-0">Register for the Event</h5>
                     </div>
                     <div class="card-body">
@@ -68,10 +68,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="{{ form.bike_info.id_for_label }}" class="form-label">Bike Information</label>
+                                <label for="{{ form.bike_info.id_for_label }}" class="form-label">Car Information</label>
                                 {{ form.bike_info }}
                                 <small class="form-text text-muted d-block mt-1">
-                                    Tell us about your bike (make, model, year, etc.)
+                                    Tell us about your car (make, model, year, modifications).
                                 </small>
                                 {% if form.bike_info.errors %}
                                     <div class="invalid-feedback d-block">

@@ -17,7 +17,7 @@
                 <div class="col-md-6 mb-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">📧 Email</h5>
+                            <h5 class="card-title">Email</h5>
                             {% if event %}
                                 <p class="mb-0">
                                     <a href="mailto:{{ event.contact_email }}">{{ event.contact_email }}</a>
@@ -31,7 +31,7 @@
                 <div class="col-md-6 mb-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">📞 Phone</h5>
+                            <h5 class="card-title">Phone</h5>
                             {% if event %}
                                 <p class="mb-0">
                                     <a href="tel:{{ event.contact_phone }}">{{ event.contact_phone }}</a>
@@ -45,7 +45,7 @@
             </div>
 
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header border-bottom" style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.08) !important;">
                     <h5 class="mb-0">Send us a Message</h5>
                 </div>
                 <div class="card-body">

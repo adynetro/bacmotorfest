@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Home - BAC Motorfest | Bucovina Auto Festival{% endblock %}
+{% block title %}Home - BAC Motorfest{% endblock %}
 
 {% block content %}
 <div class="hero">
     <div class="container">
+        <p class="hero-kicker">Bucovina Auto Club</p>
         <h1>Bucovina Auto Club Motorfest</h1>
-        <p>Celebrating Car Culture, Tuning & Automotive Passion</p>
+        <p>An elevated auto festival experience in Vatra Dornei focused on modified cars, retro builds, competitions, and community.</p>
         {% if event %}
             <a href="{% url 'core:registration' %}" class="btn btn-primary btn-lg me-2">
-                <i class="fas fa-ticket-alt"></i> Register Now
+                Register Now
             </a>
             <a href="{% url 'core:gallery' %}" class="btn btn-outline-light btn-lg">
-                <i class="fas fa-image"></i> View Gallery
+                View Gallery
             </a>
         {% endif %}
     </div>
@@ -23,7 +24,7 @@
     <!-- Event Information -->
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto">
-            <h2 class="section-title"><i class="fas fa-info-circle"></i> About the Event</h2>
+            <h2 class="section-title">About the Event</h2>
             <div class="card">
                 <div class="card-body p-4">
                     <h5 class="card-title">{{ event.title }}</h5>
@@ -52,7 +53,7 @@
     <!-- Features -->
     <div class="row mb-5">
         <div class="col-lg-10 mx-auto">
-            <h2 class="section-title"><i class="fas fa-star"></i> Why Join Us?</h2>
+            <h2 class="section-title">Why Join Us</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
@@ -97,7 +98,7 @@
     <!-- Activities -->
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto">
-            <h2 class="section-title"><i class="fas fa-calendar-check"></i> Event Activities</h2>
+            <h2 class="section-title">Event Activities</h2>
             <div class="card">
                 <div class="card-body p-4">
                     <ul class="list-unstyled">
@@ -115,15 +116,15 @@
     <!-- CTA Section -->
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-title"><i class="fas fa-rocket"></i> Don't Miss Out!</h2>
+            <h2 class="section-title">Don’t Miss Out</h2>
             <p class="lead mb-4" style="color: var(--mid-text);">
                 Join the largest car festival celebration in Bucovina. Secure your spot today!
             </p>
             <a href="{% url 'core:registration' %}" class="btn btn-primary btn-lg me-3">
-                <i class="fas fa-ticket-alt"></i> Register Your Car
+                Register Your Car
             </a>
             <a href="{% url 'core:contact' %}" class="btn btn-outline-light btn-lg">
-                <i class="fas fa-envelope"></i> Contact Us
+                Contact Us
             </a>
         </div>
     </div>
