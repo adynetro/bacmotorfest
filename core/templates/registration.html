@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Registration - BAC Motorfest{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Event Registration</h1>
+        <p>Secure your spot at BAC Motorfest</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            {% if event and event.registration_open %}
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">{{ event.title }}</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <strong>📅 Date:</strong>
+                                <p>{{ event.date|date:"F j, Y H:i" }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong>📍 Location:</strong>
+                                <p>{{ event.location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Register for the Event</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" class="form">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="{{ form.name.id_for_label }}" class="form-label">Full Name *</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">Email Address *</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.email.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">Phone Number *</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.phone.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="{{ form.bike_info.id_for_label }}" class="form-label">Bike Information</label>
+                                {{ form.bike_info }}
+                                <small class="form-text text-muted d-block mt-1">
+                                    Tell us about your bike (make, model, year, etc.)
+                                </small>
+                                {% if form.bike_info.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ form.bike_info.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="alert alert-info" role="alert">
+                                <small>
+                                    <strong>Note:</strong> Your registration will be reviewed and confirmed by our team.
+                                    You will receive a confirmation email once approved.
+                                </small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Submit Registration</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Questions?</h5>
+                        <p class="mb-0">
+                            If you have any questions, please feel free to <a href="{% url 'core:contact' %}">contact us</a>.
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning text-center">
+                    <h4>Registration Closed</h4>
+                    <p>Registration for this event is currently closed. Please check back later or contact us for more information.</p>
+                    <a href="{% url 'core:contact' %}" class="btn btn-primary mt-2">Contact Us</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

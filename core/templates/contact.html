@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - BAC Motorfest{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>Get in touch with the BAC Motorfest team</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="row mb-5">
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">📧 Email</h5>
+                            {% if event %}
+                                <p class="mb-0">
+                                    <a href="mailto:{{ event.contact_email }}">{{ event.contact_email }}</a>
+                                </p>
+                            {% else %}
+                                <p class="text-muted mb-0">Contact information not available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">📞 Phone</h5>
+                            {% if event %}
+                                <p class="mb-0">
+                                    <a href="tel:{{ event.contact_phone }}">{{ event.contact_phone }}</a>
+                                </p>
+                            {% else %}
+                                <p class="text-muted mb-0">Contact information not available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Send us a Message</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="form">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Your Name *</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Your Email *</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.subject.id_for_label }}" class="form-label">Subject *</label>
+                            {{ form.subject }}
+                            {% if form.subject.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.subject.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="{{ form.message.id_for_label }}" class="form-label">Message *</label>
+                            {{ form.message }}
+                            {% if form.message.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.message.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <small>
+                    <strong>Note:</strong> We strive to respond to all inquiries within 24 hours during business days.
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
