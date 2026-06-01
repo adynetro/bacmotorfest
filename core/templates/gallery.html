@@ -43,6 +43,7 @@
         transition: all 0.3s ease;
         border: 1px solid rgba(255, 107, 53, 0.2);
         background: rgba(255, 255, 255, 0.02);
+        user-select: none;
     }
 
     .gallery-item:hover {
@@ -66,28 +67,6 @@
 
     .gallery-item:hover img {
         transform: scale(1.1);
-    }
-
-    .gallery-item-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
-        color: white;
-        padding: 1.5rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .gallery-item-overlay {
-        opacity: 1;
-    }
-
-    .gallery-item-caption {
-        font-size: 0.95rem;
-        margin: 0;
-        font-weight: 500;
     }
 
     .empty-gallery {
@@ -133,13 +112,6 @@
                         <a href="{{ image.image.url }}" data-lightbox="event-gallery" data-title="{{ image.caption }}">
                             <img src="{{ image.image.url }}" alt="{{ image.caption }}">
                         </a>
-                        {% if image.caption %}
-                        <div class="gallery-item-overlay">
-                            <p class="gallery-item-caption">
-                                <i class="fas fa-tag"></i> {{ image.caption }}
-                            </p>
-                        </div>
-                        {% endif %}
                     </div>
                     {% endfor %}
                 </div>
@@ -167,6 +139,7 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 <script>
     lightbox.option({
