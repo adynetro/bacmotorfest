@@ -39,6 +39,15 @@
         position: relative;
         z-index: 2;
     }
+
+    .about-event-image {
+        width: 100%;
+        height: auto;
+        border-radius: 14px;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+        display: block;
+    }
 </style>
 {% endblock %}
 
@@ -71,6 +80,11 @@
             <h2 class="section-title">About the Event</h2>
             <div class="card no-box">
                 <div class="card-body p-4">
+                    <img
+                        src="{% static 'images/about-event-main.jpeg' %}"
+                        alt="BAC Motorfest participants and cars in Vatra Dornei"
+                        class="about-event-image"
+                    >
                     <h5 class="card-title">{{ event.title }}</h5>
                     <p class="card-text">
                         Bucovina Auto Club Motorfest transforms the original Auto Meet concept into a full festival format,
