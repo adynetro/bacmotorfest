@@ -61,7 +61,7 @@
         display: flex;
         width: max-content;
         align-items: center;
-        animation: sponsorScroll 32s linear infinite;
+        animation: sponsorScroll 18s ease-in-out infinite alternate;
     }
 
     .sponsor-item {
@@ -87,7 +87,7 @@
 
     @keyframes sponsorScroll {
         from { transform: translateX(0); }
-        to { transform: translateX(-50%); }
+        to { transform: translateX(-35%); }
     }
 
     .why-join-accordion {
@@ -175,17 +175,6 @@
 {% if sponsors %}
 <div class="sponsor-crawler">
     <div class="sponsor-track">
-        {% for sponsor in sponsors %}
-            <div class="sponsor-item">
-                {% if sponsor.website %}
-                    <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" aria-label="{{ sponsor.name }}">
-                        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
-                    </a>
-                {% else %}
-                    <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
-                {% endif %}
-            </div>
-        {% endfor %}
         {% for sponsor in sponsors %}
             <div class="sponsor-item">
                 {% if sponsor.website %}
