@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}News - BAC Motorfest{% endblock %}
+
+{% block extra_css %}
+<style>
+    .news-cover {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+
+    .news-meta {
+        color: var(--brand);
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-bottom: 0.65rem;
+    }
+
+    .news-card {
+        height: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <p class="hero-kicker">BAC Motorfest Updates</p>
+        <h1>Latest News</h1>
+        <p>Official announcements, event updates, and highlights from Bucovina Auto Club Motorfest.</p>
+    </div>
+</div>
+
+<div class="container pb-4">
+    {% if posts %}
+        <div class="row g-4">
+            {% for post in posts %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card news-card">
+                        <div class="card-body">
+                            {% if post.cover_image %}
+                                <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="news-cover">
+                            {% endif %}
+                            <div class="news-meta">{{ post.published_at|date:"F j, Y" }}</div>
+                            <h4 class="card-title">{{ post.title }}</h4>
+                            <p class="card-text">
+                                {% if post.excerpt %}
+                                    {{ post.excerpt }}
+                                {% else %}
+                                    {{ post.content|striptags|truncatewords:28 }}
+                                {% endif %}
+                            </p>
+                            <a class="btn btn-primary" href="{% url 'core:news_detail' post.slug %}">Read News</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <p class="mb-0 text-muted">No news published yet. Check back soon for updates.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

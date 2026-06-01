@@ -5,7 +5,7 @@ from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import path, reverse
-from .models import Event, Gallery, GalleryImage, Registration, Message, Sponsor
+from .models import Event, Gallery, GalleryImage, Registration, Message, Sponsor, NewsPost
 
 
 @admin.register(Event)
@@ -194,3 +194,29 @@ class SponsorAdmin(admin.ModelAdmin):
     search_fields = ["name", "website"]
     ordering = ["order", "name"]
     fields = ["name", "logo", "website", "order", "active"]
+
+
+class NewsPostAdminForm(forms.ModelForm):
+    class Meta:
+        model = NewsPost
+        fields = "__all__"
+        widgets = {
+            "content": forms.Textarea(attrs={"class": "news-wysiwyg", "rows": 18}),
+        }
+
+    class Media:
+        js = (
+            "https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js",
+            "js/news_admin_wysiwyg.js",
+        )
+
+
+@admin.register(NewsPost)
+class NewsPostAdmin(admin.ModelAdmin):
+    form = NewsPostAdminForm
+    list_display = ["title", "published", "published_at", "updated_at"]
+    list_filter = ["published", "published_at"]
+    list_editable = ["published"]
+    search_fields = ["title", "excerpt", "content"]
+    prepopulated_fields = {"slug": ("title",)}
+    readonly_fields = ["created_at", "updated_at"]

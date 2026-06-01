@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Event(models.Model):
@@ -97,3 +98,32 @@ class Sponsor(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class NewsPost(models.Model):
+    title = models.CharField(max_length=220)
+    slug = models.SlugField(max_length=240, unique=True, blank=True)
+    excerpt = models.CharField(max_length=320, blank=True)
+    content = models.TextField()
+    cover_image = models.ImageField(upload_to="news/", blank=True)
+    published = models.BooleanField(default=False)
+    published_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-published_at", "-created_at"]
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.title) or "news-post"
+            slug = base_slug
+            counter = 2
+            while NewsPost.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

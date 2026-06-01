@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Event, Gallery, Registration, Message, Sponsor
+from .models import Event, Gallery, Registration, Message, Sponsor, NewsPost
 from .forms import RegistrationForm, ContactForm
 
 
@@ -83,3 +83,21 @@ def sponsorship(request):
         "sponsors": Sponsor.objects.filter(active=True),
     }
     return render(request, "sponsorship.html", context)
+
+
+def news_list(request):
+    context = {
+        "event": _latest_event(),
+        "posts": NewsPost.objects.filter(published=True),
+    }
+    return render(request, "news_list.html", context)
+
+
+def news_detail(request, slug):
+    post = get_object_or_404(NewsPost, slug=slug, published=True)
+    context = {
+        "event": _latest_event(),
+        "post": post,
+        "posts": NewsPost.objects.filter(published=True).exclude(pk=post.pk)[:3],
+    }
+    return render(request, "news_detail.html", context)
