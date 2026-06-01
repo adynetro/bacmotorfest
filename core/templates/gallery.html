@@ -51,9 +51,14 @@
         border-color: var(--primary-color);
     }
 
+    .gallery-item a {
+        display: block;
+        aspect-ratio: 4 / 3;
+    }
+
     .gallery-item img {
         width: 100%;
-        height: 250px;
+        height: 100%;
         object-fit: cover;
         display: block;
         transition: transform 0.3s ease;
@@ -125,7 +130,7 @@
                 <div class="gallery-grid">
                     {% for image in gallery.images.all %}
                     <div class="gallery-item">
-                        <a href="{{ image.image.url }}" data-lightbox="gallery-{{ gallery.id }}" data-title="{{ image.caption }}">
+                        <a href="{{ image.image.url }}" data-lightbox="event-gallery" data-title="{{ image.caption }}">
                             <img src="{{ image.image.url }}" alt="{{ image.caption }}">
                         </a>
                         {% if image.caption %}
@@ -163,4 +168,14 @@
 
 {% block extra_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<script>
+    lightbox.option({
+        'wrapAround': true,
+        'disableScrolling': true,
+        'alwaysShowNavOnTouchDevices': true,
+        'resizeDuration': 150,
+        'fadeDuration': 150,
+        'imageFadeDuration': 150
+    })
+</script>
 {% endblock %}
