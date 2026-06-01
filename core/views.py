@@ -4,14 +4,16 @@ from .models import Event, Gallery, Registration, Message
 from .forms import RegistrationForm, ContactForm
 
 
-def index(request):
+def _latest_event():
     try:
-        event = Event.objects.latest("date")
+        return Event.objects.latest("date")
     except Event.DoesNotExist:
-        event = None
+        return None
 
+
+def index(request):
     context = {
-        "event": event,
+        "event": _latest_event(),
     }
     return render(request, "index.html", context)
 
@@ -25,11 +27,22 @@ def gallery(request):
     return render(request, "gallery.html", context)
 
 
+def about(request):
+    context = {
+        "event": _latest_event(),
+    }
+    return render(request, "about.html", context)
+
+
+def evolution(request):
+    context = {
+        "event": _latest_event(),
+    }
+    return render(request, "evolution.html", context)
+
+
 def registration(request):
-    try:
-        event = Event.objects.latest("date")
-    except Event.DoesNotExist:
-        event = None
+    event = _latest_event()
 
     if request.method == "POST":
         form = RegistrationForm(request.POST)
@@ -48,10 +61,7 @@ def registration(request):
 
 
 def contact(request):
-    try:
-        event = Event.objects.latest("date")
-    except Event.DoesNotExist:
-        event = None
+    event = _latest_event()
 
     if request.method == "POST":
         form = ContactForm(request.POST)

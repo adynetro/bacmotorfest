@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}About Event - BAC Motorfest{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <p class="hero-kicker">About the Event</p>
+        <h1>Bucovina Auto Club Motorfest</h1>
+        <p>A modern auto festival focused on modified builds, retro icons, motorsport culture, and memorable community experiences.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card h-100">
+                <div class="card-body p-4">
+                    <h2 class="section-title text-start">What Motorfest Is</h2>
+                    <p class="card-text">
+                        Bucovina Auto Club Motorfest is the next chapter of the Auto Meet Vatra Dornei initiative.
+                        It brings together modified cars, retro classics, creators, brands, and automotive fans in one
+                        premium event format.
+                    </p>
+                    <p class="card-text">
+                        The festival combines curated car displays, judged competitions, social experiences, and strong
+                        visual storytelling to create a complete destination event in the heart of Bucovina.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body p-4">
+                    <h3 class="card-title mb-3">Event Snapshot</h3>
+                    {% if event %}
+                        <p class="mb-2"><strong>Date:</strong><br>{{ event.date|date:"F j, Y H:i" }}</p>
+                        <p class="mb-2"><strong>Location:</strong><br>{{ event.location }}</p>
+                        <p class="mb-0"><strong>Contact:</strong><br>{{ event.contact_email }}</p>
+                    {% else %}
+                        <p class="card-text mb-0">Event details will be published soon.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body p-4">
+                    <h4 class="card-title">Audience</h4>
+                    <p class="card-text mb-0">Car enthusiasts, families, tourists, automotive communities, and media creators.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body p-4">
+                    <h4 class="card-title">Highlights</h4>
+                    <p class="card-text mb-0">Parade, curated car showcase, judged awards, social activities, and live content capture.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body p-4">
+                    <h4 class="card-title">Value for Partners</h4>
+                    <p class="card-text mb-0">On-site brand exposure, audience interaction, and strong regional + online visibility.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
