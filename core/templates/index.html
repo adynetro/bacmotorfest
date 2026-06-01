@@ -48,6 +48,65 @@
         box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
         display: block;
     }
+
+    .why-join-accordion {
+        --bs-accordion-bg: rgba(12, 18, 34, 0.72);
+        --bs-accordion-border-color: rgba(255, 210, 74, 0.24);
+        --bs-accordion-btn-bg: rgba(12, 18, 34, 0.78);
+        --bs-accordion-active-bg: rgba(255, 210, 74, 0.12);
+        --bs-accordion-active-color: var(--text-light);
+        --bs-accordion-color: var(--text-muted);
+        --bs-accordion-btn-color: var(--text-light);
+        --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(255, 210, 74, 0.2);
+        backdrop-filter: blur(8px);
+    }
+
+    .why-join-accordion .accordion-item {
+        border-radius: 14px;
+        overflow: hidden;
+        margin-bottom: 0.9rem;
+    }
+
+    .why-join-accordion .accordion-button {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        padding: 1rem 1.1rem;
+        transition: transform 0.22s ease;
+    }
+
+    .why-join-accordion .accordion-button:hover {
+        transform: translateX(4px);
+    }
+
+    .why-join-accordion .accordion-body {
+        color: var(--text-muted);
+        line-height: 1.65;
+    }
+
+    .join-icon {
+        color: var(--brand);
+        width: 1.8rem;
+        text-align: center;
+        margin-right: 0.65rem;
+    }
+
+    .accordion-item-animate {
+        opacity: 0;
+        transform: translateY(16px);
+        animation: liftIn 0.55s ease forwards;
+    }
+
+    .accordion-item-animate.delay-1 { animation-delay: 0.06s; }
+    .accordion-item-animate.delay-2 { animation-delay: 0.12s; }
+    .accordion-item-animate.delay-3 { animation-delay: 0.18s; }
+    .accordion-item-animate.delay-4 { animation-delay: 0.24s; }
+
+    @keyframes liftIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 </style>
 {% endblock %}
 
@@ -113,42 +172,54 @@
 
     <!-- Features -->
     <div class="row mb-5">
-        <div class="col-lg-10 mx-auto">
+        <div class="col-lg-8 mx-auto">
             <h2 class="section-title">Why Join Us</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card no-box h-100">
-                        <div class="card-body text-center feature-plain">
-                            <i class="fas fa-users fa-3x mb-3" style="color: var(--brand);"></i>
-                            <h5 class="card-title">Community</h5>
-                            <p class="card-text">Connect with fellow car enthusiasts and tuning experts from across the region.</p>
+            <div class="accordion why-join-accordion" id="whyJoinAccordion">
+                <div class="accordion-item accordion-item-animate delay-1">
+                    <h2 class="accordion-header" id="whyJoinHeadingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#whyJoinCollapseOne" aria-expanded="true" aria-controls="whyJoinCollapseOne">
+                            <i class="fas fa-users join-icon"></i> Community
+                        </button>
+                    </h2>
+                    <div id="whyJoinCollapseOne" class="accordion-collapse collapse show" aria-labelledby="whyJoinHeadingOne" data-bs-parent="#whyJoinAccordion">
+                        <div class="accordion-body">
+                            Connect with fellow car enthusiasts, builders, and tuning experts from across the region in one high-energy weekend.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card no-box h-100">
-                        <div class="card-body text-center feature-plain">
-                            <i class="fas fa-trophy fa-3x mb-3" style="color: var(--brand);"></i>
-                            <h5 class="card-title">Competitions</h5>
-                            <p class="card-text">Best Paint, Best Wrap, Best Sound System, Lowest Car & more!</p>
+                <div class="accordion-item accordion-item-animate delay-2">
+                    <h2 class="accordion-header" id="whyJoinHeadingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#whyJoinCollapseTwo" aria-expanded="false" aria-controls="whyJoinCollapseTwo">
+                            <i class="fas fa-trophy join-icon"></i> Competitions
+                        </button>
+                    </h2>
+                    <div id="whyJoinCollapseTwo" class="accordion-collapse collapse" aria-labelledby="whyJoinHeadingTwo" data-bs-parent="#whyJoinAccordion">
+                        <div class="accordion-body">
+                            Enter judged categories including Best Paint, Best Wrap, Best Sound System, and Lowest Car to compete for recognition and prizes.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card no-box h-100">
-                        <div class="card-body text-center feature-plain">
-                            <i class="fas fa-image fa-3x mb-3" style="color: var(--brand);"></i>
-                            <h5 class="card-title">Galleries</h5>
-                            <p class="card-text">Browse stunning photos from previous Auto Meet editions & past events.</p>
+                <div class="accordion-item accordion-item-animate delay-3">
+                    <h2 class="accordion-header" id="whyJoinHeadingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#whyJoinCollapseThree" aria-expanded="false" aria-controls="whyJoinCollapseThree">
+                            <i class="fas fa-image join-icon"></i> Galleries
+                        </button>
+                    </h2>
+                    <div id="whyJoinCollapseThree" class="accordion-collapse collapse" aria-labelledby="whyJoinHeadingThree" data-bs-parent="#whyJoinAccordion">
+                        <div class="accordion-body">
+                            Explore premium photo coverage from previous editions and get your build featured in our official BAC Motorfest media.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card no-box h-100">
-                        <div class="card-body text-center feature-plain">
-                            <i class="fas fa-handshake fa-3x mb-3" style="color: var(--brand);"></i>
-                            <h5 class="card-title">Network</h5>
-                            <p class="card-text">Meet brands, vendors, and automotive enthusiasts in the car culture community.</p>
+                <div class="accordion-item accordion-item-animate delay-4">
+                    <h2 class="accordion-header" id="whyJoinHeadingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#whyJoinCollapseFour" aria-expanded="false" aria-controls="whyJoinCollapseFour">
+                            <i class="fas fa-handshake join-icon"></i> Network
+                        </button>
+                    </h2>
+                    <div id="whyJoinCollapseFour" class="accordion-collapse collapse" aria-labelledby="whyJoinHeadingFour" data-bs-parent="#whyJoinAccordion">
+                        <div class="accordion-body">
+                            Meet partner brands, vendors, photographers, and fellow teams while growing your presence in the automotive community.
                         </div>
                     </div>
                 </div>
