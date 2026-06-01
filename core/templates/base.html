@@ -335,6 +335,18 @@
             padding-top: 1rem;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 768px) {
+            .brand-logo {
+                min-width: 150px;
+                width: min(44vw, 190px);
+            }
+
+            .navbar.scrolled .brand-logo {
+                min-width: 120px;
+                width: min(30vw, 140px);
+            }
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
