@@ -48,6 +48,48 @@
         position: relative;
         z-index: 2;
     }
+
+    .timeline {
+        position: relative;
+        margin: 0 auto;
+        max-width: 960px;
+    }
+
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: rgba(255, 210, 74, 0.35);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-left: 60px;
+        margin-bottom: 1.5rem;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: -48px;
+        top: 24px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--brand);
+        box-shadow: 0 0 0 4px rgba(255, 210, 74, 0.15);
+    }
+
+    @media (max-width: 768px) {
+        .timeline-item {
+            margin-left: 45px;
+        }
+        .timeline-dot {
+            left: -35px;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -126,6 +168,65 @@
                 <div class="card-body p-4">
                     <h4 class="card-title">Value for Partners</h4>
                     <p class="card-text mb-0">On-site brand exposure, audience interaction, and strong regional + online visibility.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-10 mx-auto">
+            <h2 class="section-title">Event Evolution</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h3 class="card-title">Phase 1 — Auto Meet Vatra Dornei</h3>
+                            <p class="card-text mb-0">
+                                The event started as Auto Meet Vatra Dornei, gathering modified and retro cars and building a
+                                strong local automotive community.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h3 class="card-title">Phase 2 — Regional Growth</h3>
+                            <p class="card-text mb-0">
+                                Participation expanded across multiple counties, with increased media presence, partnerships, and
+                                stronger audience engagement.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h3 class="card-title">Phase 3 — Bucovina Auto Club Motorfest</h3>
+                            <p class="card-text mb-0">
+                                In 2026, the concept evolved into a full festival identity: curated showcases, judged competitions,
+                                interactive audience activities, and stronger sponsor integration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h3 class="card-title">Phase 4 — Next Stage</h3>
+                            <p class="card-text mb-0">
+                                Motorfest continues to scale as a premium automotive destination for enthusiasts, brands,
+                                creators, and visitors in Bucovina.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

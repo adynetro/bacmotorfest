@@ -35,10 +35,7 @@ def about(request):
 
 
 def evolution(request):
-    context = {
-        "event": _latest_event(),
-    }
-    return render(request, "evolution.html", context)
+    return redirect("core:about")
 
 
 def registration(request):
