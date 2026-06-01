@@ -14,6 +14,7 @@ def _latest_event():
 def index(request):
     context = {
         "event": _latest_event(),
+        "sponsors": Sponsor.objects.filter(active=True),
     }
     return render(request, "index.html", context)
 

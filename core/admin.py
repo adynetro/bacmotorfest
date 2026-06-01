@@ -191,5 +191,6 @@ class SponsorAdmin(admin.ModelAdmin):
     list_display = ["name", "order", "active"]
     list_editable = ["order", "active"]
     list_filter = ["active"]
-    search_fields = ["name", "benefits", "website"]
+    search_fields = ["name", "website"]
     ordering = ["order", "name"]
+    fields = ["name", "logo", "website", "order", "active"]

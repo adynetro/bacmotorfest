@@ -49,6 +49,47 @@
         display: block;
     }
 
+    .sponsor-crawler {
+        overflow: hidden;
+        border-top: 1px solid rgba(255, 210, 74, 0.18);
+        border-bottom: 1px solid rgba(255, 210, 74, 0.18);
+        background: rgba(9, 14, 26, 0.62);
+        backdrop-filter: blur(6px);
+    }
+
+    .sponsor-track {
+        display: flex;
+        width: max-content;
+        align-items: center;
+        animation: sponsorScroll 32s linear infinite;
+    }
+
+    .sponsor-item {
+        width: 170px;
+        height: 85px;
+        margin: 0.75rem 1.2rem;
+        padding: 0.6rem;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 210, 74, 0.16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .sponsor-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: grayscale(0.15);
+    }
+
+    @keyframes sponsorScroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
     .why-join-accordion {
         --bs-accordion-bg: rgba(12, 18, 34, 0.72);
         --bs-accordion-border-color: rgba(255, 210, 74, 0.24);
@@ -130,6 +171,35 @@
         {% endif %}
     </div>
 </div>
+
+{% if sponsors %}
+<div class="sponsor-crawler">
+    <div class="sponsor-track">
+        {% for sponsor in sponsors %}
+            <div class="sponsor-item">
+                {% if sponsor.website %}
+                    <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" aria-label="{{ sponsor.name }}">
+                        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
+                    </a>
+                {% else %}
+                    <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% for sponsor in sponsors %}
+            <div class="sponsor-item">
+                {% if sponsor.website %}
+                    <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" aria-label="{{ sponsor.name }}">
+                        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
+                    </a>
+                {% else %}
+                    <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 <div class="container py-5">
     {% if event %}
