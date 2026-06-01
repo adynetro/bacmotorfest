@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}Sponsorship - BAC Motorfest{% endblock %}
+
+{% block extra_css %}
+<style>
+    .benefit-card {
+        height: 100%;
+        padding: 1.25rem;
+    }
+
+    .benefit-icon {
+        color: var(--brand);
+        font-size: 1.6rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .sponsor-logo-wrap {
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 210, 74, 0.2);
+        border-radius: 14px;
+        padding: 1rem;
+    }
+
+    .sponsor-logo {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
+    }
+
+    .sponsor-name {
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        margin-top: 0.9rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .sponsor-benefits {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <p class="hero-kicker">Partner With BAC Motorfest</p>
+        <h1>Sponsorship Opportunities</h1>
+        <p>
+            Support one of Bucovina’s most active automotive communities and position your brand
+            in front of thousands of enthusiasts, teams, and media audiences.
+        </p>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <h2 class="section-title">Benefits of Sponsoring</h2>
+            <div class="row g-3">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card benefit-card">
+                        <i class="fas fa-bullhorn benefit-icon"></i>
+                        <h5 class="card-title">Brand Visibility</h5>
+                        <p class="card-text">Presence on event communications, social media, and on-site branding areas.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card benefit-card">
+                        <i class="fas fa-users benefit-icon"></i>
+                        <h5 class="card-title">Target Audience</h5>
+                        <p class="card-text">Direct access to automotive enthusiasts, performance drivers, and local communities.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card benefit-card">
+                        <i class="fas fa-camera benefit-icon"></i>
+                        <h5 class="card-title">Media Exposure</h5>
+                        <p class="card-text">Association with official photo, video, and influencer content from the festival.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card benefit-card">
+                        <i class="fas fa-handshake benefit-icon"></i>
+                        <h5 class="card-title">Business Networking</h5>
+                        <p class="card-text">Connect with teams, vendors, and partners for long-term collaborations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h2 class="section-title">Our Sponsors</h2>
+            {% if sponsors %}
+                <div class="row g-4">
+                    {% for sponsor in sponsors %}
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="text-center h-100">
+                                <div class="sponsor-logo-wrap">
+                                    {% if sponsor.website %}
+                                        <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" aria-label="{{ sponsor.name }}">
+                                            <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo" class="sponsor-logo">
+                                        </a>
+                                    {% else %}
+                                        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo" class="sponsor-logo">
+                                    {% endif %}
+                                </div>
+                                <h5 class="sponsor-name">{{ sponsor.name }}</h5>
+                                {% if sponsor.benefits %}
+                                    <p class="sponsor-benefits">{{ sponsor.benefits }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card">
+                    <div class="card-body text-center py-4">
+                        <p class="mb-0 text-muted">Sponsors will be displayed here once added from the admin panel.</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

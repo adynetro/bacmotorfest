@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Event, Gallery, Registration, Message
+from .models import Event, Gallery, Registration, Message, Sponsor
 from .forms import RegistrationForm, ContactForm
 
 
@@ -77,3 +77,11 @@ def contact(request):
         "event": event,
     }
     return render(request, "contact.html", context)
+
+
+def sponsorship(request):
+    context = {
+        "event": _latest_event(),
+        "sponsors": Sponsor.objects.filter(active=True),
+    }
+    return render(request, "sponsorship.html", context)

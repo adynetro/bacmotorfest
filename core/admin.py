@@ -5,7 +5,7 @@ from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import path, reverse
-from .models import Event, Gallery, GalleryImage, Registration, Message
+from .models import Event, Gallery, GalleryImage, Registration, Message, Sponsor
 
 
 @admin.register(Event)
@@ -184,3 +184,12 @@ class MessageAdmin(admin.ModelAdmin):
             "classes": ("collapse",)
         }),
     )
+
+
+@admin.register(Sponsor)
+class SponsorAdmin(admin.ModelAdmin):
+    list_display = ["name", "order", "active"]
+    list_editable = ["order", "active"]
+    list_filter = ["active"]
+    search_fields = ["name", "benefits", "website"]
+    ordering = ["order", "name"]

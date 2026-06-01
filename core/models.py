@@ -81,3 +81,19 @@ class Message(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.subject}"
+
+
+class Sponsor(models.Model):
+    name = models.CharField(max_length=200)
+    logo = models.ImageField(upload_to="sponsors/")
+    website = models.URLField(blank=True)
+    benefits = models.CharField(max_length=300, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order", "name"]
+
+    def __str__(self):
+        return self.name
