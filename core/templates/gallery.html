@@ -1,40 +1,54 @@
 {% extends "base.html" %}
 
-{% block title %}Gallery - BAC Motorfest{% endblock %}
+{% block title %}Gallery - BAC Motorfest | Photo Collections{% endblock %}
 
 {% block extra_css %}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 <style>
     .gallery-year {
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary-color);
     }
 
     .gallery-title {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: var(--secondary-color);
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--light-text);
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .gallery-description {
+        color: var(--mid-text);
+        font-style: italic;
         margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 3px solid var(--primary-color);
     }
 
     .gallery-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
     }
 
     .gallery-item {
         position: relative;
         overflow: hidden;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 107, 53, 0.2);
+        background: rgba(255, 255, 255, 0.02);
     }
 
     .gallery-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        border-color: var(--primary-color);
     }
 
     .gallery-item img {
@@ -42,6 +56,11 @@
         height: 250px;
         object-fit: cover;
         display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.1);
     }
 
     .gallery-item-overlay {
@@ -49,11 +68,11 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
         color: white;
-        padding: 1rem;
+        padding: 1.5rem;
         opacity: 0;
-        transition: opacity 0.3s;
+        transition: opacity 0.3s ease;
     }
 
     .gallery-item:hover .gallery-item-overlay {
@@ -61,8 +80,24 @@
     }
 
     .gallery-item-caption {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         margin: 0;
+        font-weight: 500;
+    }
+
+    .empty-gallery {
+        padding: 3rem;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+        border: 2px dashed rgba(255, 107, 53, 0.3);
+    }
+
+    .empty-gallery i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        opacity: 0.5;
     }
 </style>
 {% endblock %}
@@ -70,18 +105,20 @@
 {% block content %}
 <div class="hero">
     <div class="container">
-        <h1>Photo Galleries</h1>
-        <p>Explore the best moments from BAC Motorfest editions</p>
+        <h1><i class="fas fa-images"></i> Photo Galleries</h1>
+        <p>Explore stunning moments from previous BAC Auto Meet & Motorfest editions</p>
     </div>
 </div>
 
-<div class="container pb-5">
+<div class="container py-5">
     {% if galleries %}
         {% for gallery in galleries %}
         <div class="gallery-year">
-            <h2 class="gallery-title">{{ gallery.title }} - {{ gallery.year }}</h2>
+            <h2 class="gallery-title">
+                <i class="fas fa-calendar-alt"></i> {{ gallery.title }}
+            </h2>
             {% if gallery.description %}
-                <p class="text-muted mb-3">{{ gallery.description }}</p>
+                <p class="gallery-description">{{ gallery.description }}</p>
             {% endif %}
 
             {% if gallery.images.all %}
@@ -93,21 +130,32 @@
                         </a>
                         {% if image.caption %}
                         <div class="gallery-item-overlay">
-                            <p class="gallery-item-caption">{{ image.caption }}</p>
+                            <p class="gallery-item-caption">
+                                <i class="fas fa-tag"></i> {{ image.caption }}
+                            </p>
                         </div>
                         {% endif %}
                     </div>
                     {% endfor %}
                 </div>
             {% else %}
-                <p class="text-muted text-center py-4">No images in this gallery yet.</p>
+                <div class="empty-gallery">
+                    <i class="fas fa-image"></i>
+                    <h4>No Images Yet</h4>
+                    <p style="color: var(--mid-text); margin-bottom: 0;">
+                        Photos from {{ gallery.year }} will be added soon. Stay tuned!
+                    </p>
+                </div>
             {% endif %}
         </div>
         {% endfor %}
     {% else %}
-        <div class="alert alert-info text-center mt-4">
-            <h4>No galleries available yet</h4>
-            <p>Check back soon to see photos from our events!</p>
+        <div class="alert alert-info text-center mt-4 p-5">
+            <i class="fas fa-info-circle fa-2x mb-3" style="color: var(--accent-color);"></i>
+            <h4>No Galleries Available Yet</h4>
+            <p style="color: var(--mid-text); margin-bottom: 0;">
+                Check back soon to see photos from our Auto Meet editions and events!
+            </p>
         </div>
     {% endif %}
 </div>

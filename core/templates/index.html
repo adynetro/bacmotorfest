@@ -1,35 +1,47 @@
 {% extends "base.html" %}
 
-{% block title %}Home - BAC Motorfest{% endblock %}
+{% block title %}Home - BAC Motorfest | Bucovina Auto Festival{% endblock %}
 
 {% block content %}
 <div class="hero">
     <div class="container">
-        <h1>Welcome to BAC Motorfest</h1>
-        <p>Experience the thrill of motorcycle culture and community</p>
+        <h1>Bucovina Auto Club Motorfest</h1>
+        <p>Celebrating Car Culture, Tuning & Automotive Passion</p>
         {% if event %}
-            <a href="{% url 'core:registration' %}" class="btn btn-light btn-lg">Register Now</a>
+            <a href="{% url 'core:registration' %}" class="btn btn-primary btn-lg me-2">
+                <i class="fas fa-ticket-alt"></i> Register Now
+            </a>
+            <a href="{% url 'core:gallery' %}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-image"></i> View Gallery
+            </a>
         {% endif %}
     </div>
 </div>
 
-<div class="container">
+<div class="container py-5">
     {% if event %}
+    <!-- Event Information -->
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto">
-            <h2 class="section-title">About the Event</h2>
-            <div class="card mb-4">
-                <div class="card-body">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> About the Event</h2>
+            <div class="card">
+                <div class="card-body p-4">
                     <h5 class="card-title">{{ event.title }}</h5>
                     <p class="card-text">{{ event.description }}</p>
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <strong>📅 Date:</strong><br>
-                            {{ event.date|date:"F j, Y H:i" }}
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div style="color: var(--accent-color);">
+                                <i class="fas fa-calendar-alt fa-2x mb-2"></i>
+                                <h6>Event Date</h6>
+                                <p class="mb-0">{{ event.date|date:"F j, Y H:i" }}</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <strong>📍 Location:</strong><br>
-                            {{ event.location }}
+                        <div class="col-md-6 mb-3">
+                            <div style="color: var(--accent-color);">
+                                <i class="fas fa-map-marker-alt fa-2x mb-2"></i>
+                                <h6>Location</h6>
+                                <p class="mb-0">{{ event.location }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,57 +49,87 @@
         </div>
     </div>
 
+    <!-- Features -->
+    <div class="row mb-5">
+        <div class="col-lg-10 mx-auto">
+            <h2 class="section-title"><i class="fas fa-star"></i> Why Join Us?</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-users fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <h5 class="card-title">Community</h5>
+                            <p class="card-text">Connect with fellow car enthusiasts and tuning experts from across the region.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-trophy fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <h5 class="card-title">Competitions</h5>
+                            <p class="card-text">Best Paint, Best Wrap, Best Sound System, Lowest Car & more!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-image fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <h5 class="card-title">Galleries</h5>
+                            <p class="card-text">Browse stunning photos from previous Auto Meet editions & past events.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-handshake fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <h5 class="card-title">Network</h5>
+                            <p class="card-text">Meet brands, vendors, and automotive enthusiasts in the car culture community.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activities -->
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto">
-            <h2 class="section-title">Why Join Us?</h2>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">🏍️ Community</h5>
-                            <p class="card-text">Connect with fellow motorcycle enthusiasts and make lasting friendships.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">🎉 Events</h5>
-                            <p class="card-text">Experience rides, shows, competitions, and entertainment for all.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">📸 Memories</h5>
-                            <p class="card-text">Create unforgettable memories with beautiful photo galleries.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">🤝 Network</h5>
-                            <p class="card-text">Meet sponsors, vendors, and fellow riders in the motorcycle community.</p>
-                        </div>
-                    </div>
+            <h2 class="section-title"><i class="fas fa-calendar-check"></i> Event Activities</h2>
+            <div class="card">
+                <div class="card-body p-4">
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Auto Parade</strong> - Showcase your ride through Vatra Dornei</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Car Exhibition</strong> - Modified & Retro vehicles on display</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Judged Competitions</strong> - Win prizes for your car</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Interactive Activities</strong> - For participants & visitors</li>
+                        <li><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Social Events</strong> - Outdoor entertainment & networking</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- CTA Section -->
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-title">Ready to Join?</h2>
-            <p class="lead mb-4">Don't miss out on the best motorcycle festival of the year!</p>
-            <a href="{% url 'core:registration' %}" class="btn btn-primary btn-lg">Register Here</a>
-            <a href="{% url 'core:contact' %}" class="btn btn-outline-primary btn-lg ms-2">Ask Questions</a>
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Don't Miss Out!</h2>
+            <p class="lead mb-4" style="color: var(--mid-text);">
+                Join the largest car festival celebration in Bucovina. Secure your spot today!
+            </p>
+            <a href="{% url 'core:registration' %}" class="btn btn-primary btn-lg me-3">
+                <i class="fas fa-ticket-alt"></i> Register Your Car
+            </a>
+            <a href="{% url 'core:contact' %}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
         </div>
     </div>
     {% else %}
     <div class="alert alert-info text-center">
-        <h4>Welcome to BAC Motorfest</h4>
+        <h4><i class="fas fa-info-circle"></i> Welcome to BAC Motorfest</h4>
         <p>Events will be available soon. Check back later!</p>
     </div>
     {% endif %}
