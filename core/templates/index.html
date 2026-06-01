@@ -1,10 +1,54 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home - BAC Motorfest{% endblock %}
 
+{% block extra_css %}
+<style>
+    .hero.hero-video {
+        position: relative;
+        min-height: 68vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 5rem 0;
+        background: #05070f;
+    }
+
+    .hero-bg-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        filter: saturate(1.1) contrast(1.02);
+    }
+
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background:
+            linear-gradient(180deg, rgba(5, 7, 15, 0.66) 0%, rgba(5, 7, 15, 0.78) 100%),
+            radial-gradient(circle at 50% 20%, rgba(255, 210, 74, 0.22), rgba(5, 7, 15, 0.1) 45%);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="hero">
-    <div class="container">
+<div class="hero hero-video">
+    <video class="hero-bg-video" autoplay muted loop playsinline>
+        <source src="{% static 'videos/landing_hero_video.mp4' %}" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
         <p class="hero-kicker">Bucovina Auto Club</p>
         <h1>Bucovina Auto Club Motorfest</h1>
         <p>An elevated auto festival experience in Vatra Dornei focused on modified cars, retro builds, competitions, and community.</p>
@@ -58,7 +102,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <i class="fas fa-users fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <i class="fas fa-users fa-3x mb-3" style="color: var(--brand);"></i>
                             <h5 class="card-title">Community</h5>
                             <p class="card-text">Connect with fellow car enthusiasts and tuning experts from across the region.</p>
                         </div>
@@ -67,7 +111,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <i class="fas fa-trophy fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <i class="fas fa-trophy fa-3x mb-3" style="color: var(--brand);"></i>
                             <h5 class="card-title">Competitions</h5>
                             <p class="card-text">Best Paint, Best Wrap, Best Sound System, Lowest Car & more!</p>
                         </div>
@@ -76,7 +120,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <i class="fas fa-image fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <i class="fas fa-image fa-3x mb-3" style="color: var(--brand);"></i>
                             <h5 class="card-title">Galleries</h5>
                             <p class="card-text">Browse stunning photos from previous Auto Meet editions & past events.</p>
                         </div>
@@ -85,7 +129,7 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <div class="card-body text-center">
-                            <i class="fas fa-handshake fa-3x mb-3" style="color: var(--primary-color);"></i>
+                            <i class="fas fa-handshake fa-3x mb-3" style="color: var(--brand);"></i>
                             <h5 class="card-title">Network</h5>
                             <p class="card-text">Meet brands, vendors, and automotive enthusiasts in the car culture community.</p>
                         </div>
@@ -102,11 +146,11 @@
             <div class="card">
                 <div class="card-body p-4">
                     <ul class="list-unstyled">
-                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Auto Parade</strong> - Showcase your ride through Vatra Dornei</li>
-                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Car Exhibition</strong> - Modified & Retro vehicles on display</li>
-                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Judged Competitions</strong> - Win prizes for your car</li>
-                        <li class="mb-3"><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Interactive Activities</strong> - For participants & visitors</li>
-                        <li><i class="fas fa-car" style="color: var(--primary-color); margin-right: 10px;"></i><strong>Social Events</strong> - Outdoor entertainment & networking</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--brand); margin-right: 10px;"></i><strong>Auto Parade</strong> - Showcase your ride through Vatra Dornei</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--brand); margin-right: 10px;"></i><strong>Car Exhibition</strong> - Modified & Retro vehicles on display</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--brand); margin-right: 10px;"></i><strong>Judged Competitions</strong> - Win prizes for your car</li>
+                        <li class="mb-3"><i class="fas fa-car" style="color: var(--brand); margin-right: 10px;"></i><strong>Interactive Activities</strong> - For participants & visitors</li>
+                        <li><i class="fas fa-car" style="color: var(--brand); margin-right: 10px;"></i><strong>Social Events</strong> - Outdoor entertainment & networking</li>
                     </ul>
                 </div>
             </div>
@@ -117,7 +161,7 @@
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-title">Don’t Miss Out</h2>
-            <p class="lead mb-4" style="color: var(--mid-text);">
+            <p class="lead mb-4" style="color: var(--text-muted);">
                 Join the largest car festival celebration in Bucovina. Secure your spot today!
             </p>
             <a href="{% url 'core:registration' %}" class="btn btn-primary btn-lg me-3">
