@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+    {% if original %}
+        <li>
+            <a href="{% url 'admin:core_gallery_bulk_upload' original.pk %}">Bulk upload images</a>
+        </li>
+    {% endif %}
+{% endblock %}

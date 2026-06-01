@@ -1,4 +1,10 @@
-from django.contrib import admin
+from pathlib import Path
+
+from django import forms
+from django.contrib import admin, messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import path, reverse
 from .models import Event, Gallery, GalleryImage, Registration, Message
 
 
@@ -25,6 +31,26 @@ class GalleryImageInline(admin.TabularInline):
     fields = ["image", "caption", "order"]
 
 
+class GalleryBulkUploadForm(forms.Form):
+    class MultipleFileInput(forms.ClearableFileInput):
+        allow_multiple_selected = True
+
+    images = forms.FileField(
+        widget=MultipleFileInput(),
+        help_text="Select one or multiple images.",
+    )
+    start_order = forms.IntegerField(
+        required=False,
+        min_value=0,
+        help_text="Optional. Leave empty to continue from current max order.",
+    )
+    use_filename_as_caption = forms.BooleanField(
+        required=False,
+        initial=True,
+        help_text="Use each file name as image caption.",
+    )
+
+
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ["title", "year", "published", "image_count"]
@@ -32,6 +58,70 @@ class GalleryAdmin(admin.ModelAdmin):
     list_editable = ["published"]
     inlines = [GalleryImageInline]
     ordering = ["-year"]
+    change_form_template = "admin/core/gallery/change_form.html"
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path(
+                "<path:object_id>/bulk-upload/",
+                self.admin_site.admin_view(self.bulk_upload_view),
+                name="core_gallery_bulk_upload",
+            ),
+        ]
+        return custom_urls + urls
+
+    def bulk_upload_view(self, request, object_id):
+        gallery = get_object_or_404(Gallery, pk=object_id)
+
+        if request.method == "POST":
+            form = GalleryBulkUploadForm(request.POST, request.FILES)
+            files = request.FILES.getlist("images")
+
+            if form.is_valid() and files:
+                max_order = gallery.images.order_by("-order").values_list("order", flat=True).first()
+                order = form.cleaned_data["start_order"]
+                if order is None:
+                    order = (max_order + 1) if max_order is not None else 0
+
+                use_filename_as_caption = form.cleaned_data["use_filename_as_caption"]
+                created_count = 0
+
+                for image_file in files:
+                    caption = ""
+                    if use_filename_as_caption:
+                        caption = Path(image_file.name).stem.replace("_", " ").replace("-", " ").strip()
+
+                    GalleryImage.objects.create(
+                        gallery=gallery,
+                        image=image_file,
+                        caption=caption,
+                        order=order,
+                    )
+                    order += 1
+                    created_count += 1
+
+                self.message_user(
+                    request,
+                    f"Uploaded {created_count} image(s) to {gallery.title}.",
+                    level=messages.SUCCESS,
+                )
+                return HttpResponseRedirect(
+                    reverse("admin:core_gallery_change", args=[gallery.pk])
+                )
+            elif not files:
+                form.add_error("images", "Please select at least one image.")
+        else:
+            form = GalleryBulkUploadForm()
+
+        context = {
+            **self.admin_site.each_context(request),
+            "opts": self.model._meta,
+            "gallery": gallery,
+            "form": form,
+            "title": f"Bulk upload images: {gallery.title}",
+        }
+        return render(request, "admin/core/gallery/bulk_upload.html", context)
 
     def image_count(self, obj):
         return obj.images.count()
