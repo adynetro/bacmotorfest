@@ -106,22 +106,12 @@
             {% if sponsors %}
                 <div class="row g-4">
                     {% for sponsor in sponsors %}
-                        <div class="col-6 col-md-4 col-lg-3">
-                            <div class="text-center h-100">
-                                <div class="sponsor-logo-wrap">
-                                    {% if sponsor.website %}
-                                        <a href="{{ sponsor.website }}" target="_blank" rel="noopener noreferrer" aria-label="{{ sponsor.name }}">
-                                            <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo" class="sponsor-logo">
-                                        </a>
-                                    {% else %}
-                                        <img src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo" class="sponsor-logo">
-                                    {% endif %}
-                                </div>
-                                <h5 class="sponsor-name">{{ sponsor.name }}</h5>
-                                {% if sponsor.benefits %}
-                                    <p class="sponsor-benefits">{{ sponsor.benefits }}</p>
-                                {% endif %}
+                        <div class="text-center h-100">
+                            <div class="sponsor-logo-wrap">
+                                <!-- Assuming no logo for this entry, using a placeholder -->
                             </div>
+                            <h5 class="sponsor-name">Bucovina Autoclub</h5>
+                            <p class="sponsor-benefits">Payment Details: Iban: O95BTRLRONCRT0DF2819401</p>
                         </div>
                     {% endfor %}
                 </div>
